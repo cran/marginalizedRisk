@@ -1,14 +1,14 @@
-# only pass ph2 data to these functions
-marginalized.risk=function(fit.risk, marker.name, data, categorical.s, weights=rep(1, nrow(data)), t=NULL, ss=NULL, verbose=FALSE) {
+1# only pass ph2 data to these functions
+marginalized.risk=function(fit.risk, marker.name, data, categorical.s, weights=rep(1, nrow(data)), t=NULL, ss=NULL, verbose=FALSE, t.end=NULL) {
     if(categorical.s) {
-        marginalized.risk.cat  (fit.risk, marker.name, data, weights=weights, t=t, verbose=verbose) 
+        marginalized.risk.cat  (fit.risk, marker.name, data, weights=weights, t=t, verbose=verbose, t.end=t.end) 
     } else {
         marginalized.risk.cont (fit.risk, marker.name, data, weights=weights, t=t, ss=ss, verbose=verbose) 
     }
 }
 
 # categorical markers
-marginalized.risk.cat=function(fit.risk, marker.name, data, weights=rep(1, nrow(data)), t=NULL, verbose=FALSE) {  
+marginalized.risk.cat=function(fit.risk, marker.name, data, weights=rep(1, nrow(data)), t=NULL, verbose=FALSE, t.end=NULL) {  
     
     if("coxph" %in% class(fit.risk)) {
         time.var=as.character(fit.risk$terms[[2]][[2]])
@@ -34,6 +34,7 @@ marginalized.risk.cat=function(fit.risk, marker.name, data, weights=rep(1, nrow(
         if (is.null(t)) {
             # return risk versus time
             tt=sort(unique(data[[time.var]][data[[y.var]]==1]))        
+            if (!is.null(t.end)) tt=c(tt, t.end)
             risks=sapply(tt, function (t) {
                 dat.tmp.mrc=data
                 dat.tmp.mrc[[time.var]]=t
@@ -89,4 +90,34 @@ marginalized.risk.cont=function(fit.risk, marker.name, data, weights=rep(1, nrow
     })
     
     if (ss.is.null) cbind(marker=ss, prob=risks) else risks
+}
+
+
+
+marginalized.risk.cont.2=function(fit.risk, marker.name, data, weights=rep(1, nrow(data)), t, ss, marker.name.2, s.2, verbose=FALSE) {
+        
+    is.coxph=FALSE
+    if (length(fit.risk$terms[[2]])==3) {
+        # presume to be coxph
+        is.coxph=TRUE
+        time.var=fit.risk$terms[[2]][[2]]
+        data[[time.var]]=t
+    } 
+    
+    data[[marker.name.2]]=s.2
+    
+    risks=sapply(ss, function(s) {
+        data[[marker.name]]=s    
+        risks = if(is.coxph) {
+            1 - exp(-predict(fit.risk, newdata=data, type="expected"))
+        } else {
+            # glm
+            predict(fit.risk, newdata=data, type="response")
+        }
+        #if(any(is.na(risks))) stop("NA's found in fit.risk")
+        
+        sum(weights * risks) / sum(weights)    
+    })
+    
+    risks
 }

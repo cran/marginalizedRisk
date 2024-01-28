@@ -17,3 +17,18 @@
     * Rename the package from marginalRisk to marginalizedRisk
     * Change the estimator from using conditional distribution of X given S to marginal distribution of X
     * Put on github
+
+2021.7.26
+    * change reference in predict coxph
+
+2021.7.27
+    * revert the last change because reference makes no difference for expected type
+
+2021.10.22
+	* chanage how E.value handles r>1
+
+2022.7.26
+	* add marginalized.risk.cont.2
+
+2023.4.26
+	* add exception handling in marginalized.risk.threshold	
