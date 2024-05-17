@@ -66,6 +66,7 @@ marginalized.risk.cat=function(fit.risk, marker.name, data, weights=rep(1, nrow(
 
 # continuous markers
 marginalized.risk.cont=function(fit.risk, marker.name, data, weights=rep(1, nrow(data)), t=NULL, ss=NULL, verbose=FALSE) {
+  
     ss.is.null=is.null(ss) 
     if (ss.is.null) ss=quantile(data[[marker.name]], seq(.05,.95,by=0.01))
         

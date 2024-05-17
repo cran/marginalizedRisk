@@ -1,12 +1,13 @@
 53315c54ec3194518e53a1252c9dfd26 *ChangeLog
-d6a24a32ff43651c2139870a2b5b7648 *DESCRIPTION
+c85bc4fb855463957f35e1e7f54ee2b9 *DESCRIPTION
 c33667b7c4b0cd3ba883964e1fc53ecb *NAMESPACE
 8618b8938ff9e96494f4d77372d5c090 *R/EvalueControlledrisk.R
-1d0852e65de9c893cb2c4e71e9cadeb1 *R/marginalized.risk.R
+f94639d0c0be5df5566412abd2ed8c38 *R/marginalized.risk.R
 a02e096fa1c3146e9cd9ed6e3923d5cd *R/marginalized.risk.threshold.R
 dd0ce9b44ccefb3dc3311559ce897520 *README.md
 5402ef6bbf35318a4ce5e146a888b9bf *build/vignette.rds
 5baa62bdade26da3eab7b30a294a537b *inst/doc/marginalizedRisk-vignette.pdf
+d3c0d92053dd88a0ce14d351f1c95077 *inst/doc/marginalizedRisk-vignette.pdf.asis
 a616e808bd826e929f56223020649675 *inst/unitTests/Makefile
 630caf7a1d55b84135b32e5358454b71 *inst/unitTests/runRUnitTests.R
 b958bbf4a5dc632adfe6d94d65c6e957 *inst/unitTests/runit.marginalized.risk.R
@@ -14,3 +15,4 @@ b958bbf4a5dc632adfe6d94d65c6e957 *inst/unitTests/runit.marginalized.risk.R
 1118086c9badc01327abd88d8a31c1df *man/marginalized.risk.Rd
 3b8e7707a5211b0fe26991dbbf2760fd *man/marginalized.risk.threshold.Rd
 da20b69e5aa8756b799a5f0eef9478e3 *tests/doRUnit.R
+d3c0d92053dd88a0ce14d351f1c95077 *vignettes/marginalizedRisk-vignette.pdf.asis
